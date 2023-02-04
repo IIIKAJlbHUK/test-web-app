@@ -1,0 +1,39 @@
+body {
+    font-family: Arial;
+    background-color: var(--tg-theme-secondary-bg-color);
+}
+
+img {
+    width: 100%;
+}
+
+h1 {
+    color: var(--tg-theme-text-color);
+}
+
+p {
+    color: var(--tg-theme-hint-color)
+}
+
+button {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+}
+
+.wrapper {
+    max-width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.tovar {
+    width: 30%;
+    margin: auto;
+}
