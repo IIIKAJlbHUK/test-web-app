@@ -59,10 +59,10 @@
         let tg_button = document.querySelector('.tg_button');
         
         for(let i = 0; i < butt.length; i++) {
-            tovars[butt[i].parentElement.id.toString()] = 0
+            tovars[butt[i].parentElement.id.toString()] = 0;
 
             butt[i].addEventListener('click', function() {
-                tovars[butt[i].parentElement.id.toString()] += 1
+                tovars[butt[i].parentElement.id.toString()] += 1;
                 butt[i].hidden = true;
                 plus[i].hidden = false;
                 minus[i].hidden = false;
@@ -72,9 +72,9 @@
             });
 
             plus[i].addEventListener('click', function(){
-                tovars[plus[i].parentElement.parentElement.id.toString()] += 1
+                tovars[plus[i].parentElement.parentElement.id.toString()] += 1;
                 tovar_count[i].innerHTML = tovars[plus[i].parentElement.parentElement.id.toString()];
-                console.log(tovars)
+                console.log(tovars);
             })
 
             minus[i].addEventListener('click', function(){
@@ -86,7 +86,7 @@
                     butt[i].hidden = false;
                     tovar_count[i].hidden = true;
                 }
-                console.log(tovars)
+                console.log(tovars);
             })
 
             plus[i].hidden = true;
@@ -95,12 +95,17 @@
         }
 
         tg_button.addEventListener('click', function(){
-            tg.sendData(tovars)
-            tg.close()
+            tg.sendData(tovars);
+            tg.close();
         })
 
-        
+        Telegram.WebApp.onEvent('mainButtonClicked', function(){
+	        tg.sendData(tovars);
+            tg.close();
+        });
 
+        
+        tg.MainButton.text = "Перейти к оформлению";
         tg.MainButton.isVisible = true;
         tg.MainButton.isActive = true;
         tg.MainButton.show();
