@@ -6,35 +6,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
+    <button class="tg_button">CONTINUE</button>
     <div class="wrapper">
-        <div class="tovar">
-            <img src="Untitled-1.png" alt="">
+        <div class="tovar" id="igla">
+            <img src="Untitled-1.png" alt="", id="gay">
             <h1>Lorem Iosum</h1>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde consequatur tempora commodi culpa dignissimos? Sint, enim non perferendis voluptas ipsa aut laudantium! Nihil pariatur maxime accusantium aspernatur atque porro mollitia?</p>
-            <button>Купить</button>
+            <h2 class="tovar_count">0</h2>
+            <button class="buy">Купить</button>
+            <div class="buttons">
+                <button class="minus">-</button>
+                <button class="plus">+</button>
+            </div>
         </div>
 
-        <div class="tovar">
+        <div class="tovar" id="xyu">
             <img src="Untitled-1.png" alt="">
             <h1>Lorem Iosum</h1>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde consequatur tempora commodi culpa dignissimos? Sint, enim non perferendis voluptas ipsa aut laudantium! Nihil pariatur maxime accusantium aspernatur atque porro mollitia?</p>
-            <button>Купить</button>
+            <h2 class="tovar_count">0</h2>
+            <button class="buy">Купить</button>
+            <div class="buttons">
+                <button class="minus">-</button>
+                <button class="plus">+</button>
+            </div>
         </div>
 
-        <div class="tovar">
+        <div class="tovar" id="gay">
             <img src="Untitled-1.png" alt="">
             <h1>Lorem Iosum</h1>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde consequatur tempora commodi culpa dignissimos? Sint, enim non perferendis voluptas ipsa aut laudantium! Nihil pariatur maxime accusantium aspernatur atque porro mollitia?</p>
-            <button>Купить</button>
+            <h2 class="tovar_count">0</h2>
+            <button class="buy">Купить</button>
+            <div class="buttons">
+                <button class="minus">-</button>
+                <button class="plus">+</button>
+            </div>
         </div>
     </div>
+    
 
-    <script src="https://telegram.org/js/telegram-web-app.js">
+    <script>
         let tg = window.Telegram.WebApp;
+        let tovars = {}
+        let butt = document.querySelectorAll('.buy');
+        let plus = document.querySelectorAll('.plus');
+        let minus = document.querySelectorAll('.minus');
+        let tovar_count = document.querySelectorAll('.tovar_count');
+        let tg_button = document.querySelector('.tg_button');
+        
+        for(let i = 0; i < butt.length; i++) {
+            tovars[butt[i].parentElement.id.toString()] = 0
+
+            butt[i].addEventListener('click', function() {
+                tovars[butt[i].parentElement.id.toString()] += 1
+                butt[i].hidden = true;
+                plus[i].hidden = false;
+                minus[i].hidden = false;
+                tovar_count[i].hidden = false;
+                tovar_count[i].innerHTML = tovars[butt[i].parentElement.id.toString()];
+                console.log(tovars);
+            });
+
+            plus[i].addEventListener('click', function(){
+                tovars[plus[i].parentElement.parentElement.id.toString()] += 1
+                tovar_count[i].innerHTML = tovars[plus[i].parentElement.parentElement.id.toString()];
+                console.log(tovars)
+            })
+
+            minus[i].addEventListener('click', function(){
+                tovars[plus[i].parentElement.parentElement.id.toString()] -= 1
+                tovar_count[i].innerHTML = tovars[minus[i].parentElement.parentElement.id.toString()];
+                if (tovars[plus[i].parentElement.parentElement.id.toString()] < 1) {
+                    plus[i].hidden = true;
+                    minus[i].hidden = true;
+                    butt[i].hidden = false;
+                    tovar_count[i].hidden = true;
+                }
+                console.log(tovars)
+            })
+
+            plus[i].hidden = true;
+            minus[i].hidden = true;
+            tovar_count[i].hidden = true;
+        }
+
+        tg_button.addEventListener('click', function(){
+            tg.sendData(tovars)
+            tg.close()
+        })
+
+        
+
         tg.MainButton.isVisible = true;
-        tg.MainButton.show()
+        tg.MainButton.isActive = true;
+        tg.MainButton.show();
+        console.log(tg.viewportHeight);
     </script>
 </body>
 </html>
