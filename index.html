@@ -94,13 +94,8 @@
             tovar_count[i].hidden = true;
         }
 
-        tg_button.addEventListener('click', function(){
-            tg.sendData("parnuha");
-            tg.close();
-        })
-
         Telegram.WebApp.onEvent('mainButtonClicked', function(){
-	    tg.sendData("porno");
+	    tg.sendData(tovars.toString());
             tg.close();
         });
 
